@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class bmsApiService {
-    baseUrl = "http://localhost:8081/";
+    baseUrl = "http://localhost:1785/";
 
     constructor(private httpClient: HttpClient) { }
 
@@ -39,7 +39,7 @@ export class bmsApiService {
         console.log(this.baseUrl+"user",data);
         const headers= new HttpHeaders().set('content-type', 'application/json;charset=utf-8').set('Access-Control-Allow-Origin', '*');
         console.log(headers," headers");
-        return this.httpClient.post("http://localhost:9191/api/user",JSON.parse(data),{'headers':headers});
+        return this.httpClient.post("http://localhost:1785/api/user",JSON.parse(data),{'headers':headers});
     }
 
 
