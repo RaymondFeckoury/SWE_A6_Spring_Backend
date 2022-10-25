@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="manageMoviesHeader">
+        <div class="manageMoviesButton" [ngStyle]="{ 'color' : currentMoviesSelected ? '#1fb5bf' : 'white'}" (click)="showCurrentMovies()">
+            CURRENT PLAYING
+        </div>
+        <div class="manageMoviesButton" [ngStyle]="{ 'color' : addmoviesSelected ? '#1fb5bf' : 'white'}" (click)="addMovies()">
+            ADD MOVIE
+        </div>
+        <div class="manageMoviesButton2" [ngStyle]="{ 'color' : archiveMoviesSelected ? '#1fb5bf' : 'white'}" (click)="archiveMovies()">
+            SCHEDULE / ARCHIVE
+        </div>
+        <div class="manageMoviesButton" [ngStyle]="{ 'color' : scheduleMoviesSelected ? '#1fb5bf' : 'white'}" (click)="scheduleMovies()">
+            UNARCHIVE
+        </div>      
+    </div>
+</div>
+
+<div *ngIf="currentMoviesSelected">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="currentlyPlayingMoviesContainer">
+                <div class="col-3" *ngFor="let movie of movies,let i = index">
+                    <div class="currentMovieContainer">
+                        <mat-card appMaterialElevation>
+                            <img class="currentMovieImage" mat-card-image src={{movie.image}} alt="poster">
+                            <mat-card-content> 
+                                <div class="d-flex">
+                                    <p> Title : &nbsp; </p>        
+                                    <mat-card-title> {{movie.title}} </mat-card-title>
+                                </div>
+                                <mat-card-actions>   
+                                    <div class="d-flex justify-content-center">
+                                        <div class="currentmovesEditBtn" (click)="openEditMoviePopup(i)">Edit</div>
+                                    </div>
+                                </mat-card-actions>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="addmoviesSelected">
+    <app-add-new-movie></app-add-new-movie>
+</div>
+
+<div *ngIf="archiveMoviesSelected">
+    <app-archive-movie></app-archive-movie>
+</div>
+
+<div *ngIf="scheduleMoviesSelected">
+    <app-unarchive-movies></app-unarchive-movies>
+</div>

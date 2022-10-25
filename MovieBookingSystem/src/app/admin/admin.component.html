@@ -1,0 +1,21 @@
+
+
+<nav>
+  <div class="logo">
+     Bookmyshow
+  </div>
+</nav>
+
+<div class="log-form">
+  <h2 class="d-flex justify-content-center">ADMIN LOGIN</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="submitLogin(loginForm)">
+    <input formControlName="email" type="email" title="email" placeholder="email" />
+    <input formControlName="password" type="password" title="username" placeholder="password" />
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn">Login</button>
+    </div>
+  </form>
+  <div class="d-flex justify-content-center">
+    <button type="submit" class="btn" (click)="admin2Route()">Admin 2</button>
+  </div><br>
+</div>
