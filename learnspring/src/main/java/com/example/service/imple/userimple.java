@@ -23,6 +23,14 @@ public class userimple implements userservice {
 	public List<userRegistration> getAllUsers() {
 		return UserRepo.findAll();
 	}
+	@Override
+	@ResponseBody
+	public userRegistration getUserById(int id) throws IdNotFoundException {
+		List<userRegistration> user = UserRepo.findByid(id);
+		if (user.isEmpty())
+			throw new IdNotFoundException("Sorry user with " + id + " not found!");
+		return user.get(0);
+	}
 	/*@Override
 	@ResponseBody
 	public userRegistration (String email) {

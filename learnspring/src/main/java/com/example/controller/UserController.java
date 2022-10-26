@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.userRegistration;
 import com.example.demo.repo.UserRepo;
+import com.example.excepion.IdNotFoundException;
 import com.example.service.userservice;
 import com.example.service.imple.userimple;
 
@@ -30,7 +31,6 @@ public class UserController {
 	@Autowired
 	private UserRepo repo;
 
-	
 	  @Autowired 
 	  private userservice us;
 	  
@@ -56,6 +56,13 @@ public class UserController {
 
 		return ResponseEntity.status(200).body(us.getAllUsers());
 	  
+	  
+	  }
+	  
+	  // To display user info on the update profile page
+	  @GetMapping(path = "/getuserinfo/{userId}") 
+	  public ResponseEntity<?> getUserInfo(@PathVariable int userId, @RequestBody userRegistration userReg) throws IdNotFoundException { 
+		return ResponseEntity.status(200).body(us.getUserById(userId));
 	  
 	  }
 	  
