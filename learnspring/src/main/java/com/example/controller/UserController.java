@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.userRegistration;
+import com.example.demo.model.PaymentCard;
 import com.example.demo.repo.UserRepo;
+import com.example.demo.repo.PaymentRepo;
 import com.example.excepion.IdNotFoundException;
 import com.example.service.userservice;
+import com.example.service.PaymentService;
 import com.example.service.imple.userimple;
 
 
@@ -35,6 +38,13 @@ public class UserController {
 	  @Autowired 
 	  private userservice us;
 	  
+	  @Autowired 
+	  private PaymentRepo paymentRepo;
+	  
+	  @Autowired 
+	  private PaymentService paymentService;
+	  
+	  
 	  @PostMapping("/user")
 	  public ResponseEntity<userRegistration> registerUser(@RequestBody userRegistration userRegistration) {
 		 //logger.info("Received controller");
@@ -47,6 +57,18 @@ public class UserController {
 	  @PostMapping("/userlogin")
 	  public ResponseEntity<Boolean> userLogin(@RequestBody userRegistration userRegistration) {
 		 return ResponseEntity.ok(repo.existsByEmailAndPassword(userRegistration.getEmail(), userRegistration.getPassword()));
+	  }
+	  
+	  @PostMapping("/addpayment")
+	  public ResponseEntity<PaymentCard> paymentCard(@RequestBody PaymentCard paymentCard) {
+		 System.out.println("Controller called for user payment "+paymentCard.toString());
+		 return ResponseEntity.ok(paymentRepo.save(paymentCard));
+	  }
+	  
+	  // Checks the number of cards that a user currently has
+	  @GetMapping(path = "/numberofcards/{userId}")
+	  public ResponseEntity<?> getPaymentCards(@PathVariable int userId) throws IdNotFoundException { 
+		  return ResponseEntity.status(200).body(paymentService.getPaymentsById(userId));
 	  }
 	  
 	  // only admins have rights to inspect all users data

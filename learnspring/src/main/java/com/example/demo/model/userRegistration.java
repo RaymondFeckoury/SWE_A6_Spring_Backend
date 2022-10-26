@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import com.example.demo.model.PaymentCard;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +31,7 @@ public class userRegistration {
 	private String email;
 	private int umobile;
 	private String uaddress;
+	//private PaymentCard card;
 
 	@Override
 	public String toString() {
@@ -50,6 +52,14 @@ public class userRegistration {
 		this.umobile = umobile;
 		this.uaddress = uaddress;
 	}
+	
+	/*public PaymentCard getPaymentCard() {
+		return card;
+	}
+	
+	public void setPaymentCard(PaymentCard card) {
+		this.card = card;
+	}*/
 
 	public userRegistration() {
 		super();
