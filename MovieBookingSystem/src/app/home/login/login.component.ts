@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog, MAT_DIALOG_DATA  } from '@angular/material/dialog';
+import { bmsApiService } from 'src/app/services/bmsapi.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   emailError:boolean = false;
   passwordFieldError:boolean = false;
-  constructor(private fb: FormBuilder,private router: Router) { }
+  constructor(private fb: FormBuilder,private dialogRef: MatDialog,private router: Router,private _bmsAs:bmsApiService) { }
+
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -39,6 +43,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    var data =  {
+      "email": "email123@email.com",
+      "password": "nicepassword"
+    };
+    let data2 = JSON.stringify(data);
+    // login endpoint returns boolean
+    this._bmsAs.putdata(data2).subscribe(res=>{
+      console.log(res," put method result");
+    });
     //Api to check valid User 
     if(this.validityCheck()) {
       // this.router.navigateByUrl('/userHomePage');

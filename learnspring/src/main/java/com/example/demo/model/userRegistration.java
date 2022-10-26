@@ -11,57 +11,67 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @ToString
 @Table(name="users")
-
 public class userRegistration {
 	
 	@Id
 	@GeneratedValue
 	private int id;
-	private String uname;
-	private String uusername;
-	private String upassword;
+	private String firstname;
+	private String lastname;
+	private String password;
 	private String uhash;
-	private String uemail;
+	private String email;
 	private int umobile;
 	private String uaddress;
 
 	@Override
 	public String toString() {
-		return "userRegistration [id=" + id + ", uname=" + uname + ", uusername=" + uusername + ", upassword="
-				+ upassword + ", uhash=" + uhash + ", uemail=" + uemail + ", umobile=" + umobile + ", uaddress="
+		return "userRegistration [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", upassword="
+				+ password + ", uhash=" + uhash + ", uemail=" + email + ", umobile=" + umobile + ", uaddress="
 				+ uaddress + "]";
 	}
 	
-	
-
-	public userRegistration(int id, String uname, String uusername, String upassword, String uhash, String uemail,
+	public userRegistration(int id, String firstname, String lastname, String upassword, String uhash, String uemail,
 			int umobile, String uaddress) {
 		super();
 		this.id = id;
-		this.uname = uname;
-		this.uusername = uusername;
-		this.upassword = upassword;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.password = upassword;
 		this.uhash = uhash;
-		this.uemail = uemail;
+		this.email = uemail;
 		this.umobile = umobile;
 		this.uaddress = uaddress;
 	}
-
-
 
 	public userRegistration() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getFirstname() {
+		return firstname;
+	}
 
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -70,28 +80,12 @@ public class userRegistration {
 		this.id = id;
 	}
 
-	public String getUname() {
-		return uname;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
-
-	public String getUusername() {
-		return uusername;
-	}
-
-	public void setUusername(String uusername) {
-		this.uusername = uusername;
-	}
-
-	public String getUpassword() {
-		return upassword;
-	}
-
-	public void setUpassword(String upassword) {
-		this.upassword = upassword;
+	public void setPassword(String upassword) {
+		this.password = upassword;
 	}
 
 	public String getUhash() {
@@ -102,12 +96,12 @@ public class userRegistration {
 		this.uhash = uhash;
 	}
 
-	public String getUemail() {
-		return uemail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUemail(String uemail) {
-		this.uemail = uemail;
+	public void setEmail(String uemail) {
+		this.email = uemail;
 	}
 
 	public int getUmobile() {

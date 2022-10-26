@@ -12,5 +12,6 @@ import com.example.demo.model.userRegistration;
 public interface UserRepo extends JpaRepository<userRegistration,String> {
 
 	List<userRegistration> findByid(int id);
+	Boolean existsByEmailAndPassword(String email, String password);
 	
 }

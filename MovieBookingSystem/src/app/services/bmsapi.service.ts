@@ -42,5 +42,12 @@ export class bmsApiService {
         return this.httpClient.post("http://localhost:1785/api/user",JSON.parse(data),{'headers':headers});
     }
 
+    checkLogin(data:any): Observable<any> {
+        console.log(this.baseUrl+"user",data);
+        const headers= new HttpHeaders().set('content-type', 'application/json;charset=utf-8').set('Access-Control-Allow-Origin', '*');
+        console.log(headers," headers");
+        return this.httpClient.post("http://localhost:1785/api/userlogin",JSON.parse(data),{'headers':headers});
+    }
+
 
 }

@@ -23,6 +23,11 @@ public class userimple implements userservice {
 	public List<userRegistration> getAllUsers() {
 		return UserRepo.findAll();
 	}
+	/*@Override
+	@ResponseBody
+	public userRegistration (String email) {
+		return UserRepo.;
+	}*/
 	@Override
 	public  void save(userRegistration user) {
 		UserRepo.save(user);

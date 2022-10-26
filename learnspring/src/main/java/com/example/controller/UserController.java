@@ -35,13 +35,18 @@ public class UserController {
 	  private userservice us;
 	  
 	  @PostMapping("/user")
-		public ResponseEntity<userRegistration> registerUser(@RequestBody userRegistration userRegistration) {
+	  public ResponseEntity<userRegistration> registerUser(@RequestBody userRegistration userRegistration) {
 		 //logger.info("Received controller");
 		 System.out.println("Controller called for user Registration "+userRegistration.toString());
 		 return ResponseEntity.ok(repo.save(userRegistration));
 			
 			
-		}
+	  }
+	  
+	  @PostMapping("/userlogin")
+	  public ResponseEntity<Boolean> userLogin(@RequestBody userRegistration userRegistration) {
+		 return ResponseEntity.ok(repo.existsByEmailAndPassword(userRegistration.getEmail(), userRegistration.getPassword()));
+	  }
 	  
 	  // only admins have rights to inspect all users data
 	  
@@ -49,7 +54,7 @@ public class UserController {
 	  public ResponseEntity<?> getUsers() { 
 		// get all users, returns empty list if user table is empty
 
-	  return ResponseEntity.status(200).body(us.getAllUsers());
+		return ResponseEntity.status(200).body(us.getAllUsers());
 	  
 	  
 	  }
