@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     let data2 = JSON.stringify(data);
     // login endpoint returns boolean
     this._bmsAs.putdata(data2).subscribe(res=>{
+      // Send the user to the home page if valid credentials are entered
       if (res) this.router.navigateByUrl('/userHomePage');
       console.log(res," put method result");
     });

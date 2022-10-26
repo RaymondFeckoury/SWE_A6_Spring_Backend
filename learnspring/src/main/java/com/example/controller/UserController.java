@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,6 +66,37 @@ public class UserController {
 		return ResponseEntity.status(200).body(us.getUserById(userId));
 	  
 	  }
+	  
+	  // To update profile
+	  @PutMapping(path = "/updateuserinfo/{userId}")
+	  public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody userRegistration userReg) throws IdNotFoundException {
+		    userRegistration curUser = us.getUserById(userId);
+		    String firstname = null;
+			String lastname = null;
+			String password = null;
+			String uaddress = null;
+			// checks fields user want's to update
+			if (userReg.getFirstname() != null) {
+				firstname = userReg.getFirstname();
+				curUser.setFirstname(firstname);
+			}
+			if (userReg.getLastname() != null) {
+				lastname = userReg.getLastname();
+				curUser.setLastname(lastname);
+			}
+			if (userReg.getPassword() != null) {
+				password = userReg.getPassword();
+				curUser.setPassword(password);
+			}
+			if (userReg.getUaddress() != null) {
+				uaddress = userReg.getUaddress();
+				curUser.setUaddress(uaddress);
+			}
+			// save changes and return updated userRegistration
+			repo.save(curUser);
+			return ResponseEntity.status(200).body(curUser);
+		}
+
 	  
 	  @GetMapping("/{id}")
 	  public ResponseEntity<List<userRegistration>>
