@@ -12,5 +12,6 @@ public interface AdminService {
 	@ResponseBody
 	List<AdminRegistration> getAllAdmins();
 	public void save(AdminRegistration admin);
+	AdminRegistration getAdminById(int id) throws IdNotFoundException;
 	
 }

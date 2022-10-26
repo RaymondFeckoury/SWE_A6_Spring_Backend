@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.AdminRegistration;
+import com.example.demo.model.userRegistration;
 import com.example.demo.repo.AdminRepo;
 import com.example.service.AdminService;
 import com.example.service.imple.userimple;
@@ -39,6 +40,11 @@ public class AdminController {
 		 //logger.info("Received controller");
 		 System.out.println("Controller called for user Registration "+AdminRegistration.toString());
 		 return ResponseEntity.ok(repo.save(AdminRegistration));
+	  }
+	  
+	  @PostMapping("/adminlogin")
+	  public ResponseEntity<Boolean> adminLogin(@RequestBody AdminRegistration AdminRegistration) {
+		 return ResponseEntity.ok(repo.existsByEmailAndPassword(AdminRegistration.getAemail(), AdminRegistration.getApassword()));
 	  }
 	  
 	  // only admins have rights to inspect all users data
@@ -67,8 +73,7 @@ public class AdminController {
 		  
 		  AdminRegistration pqr=accountData.get(0);
 		  
-		  return new ResponseEntity<List<AdminRegistration>>(accountData,
-		  HttpStatus.OK);
+		  return new ResponseEntity<List<AdminRegistration>>(accountData,HttpStatus.OK);
 	  
 	  }
 }

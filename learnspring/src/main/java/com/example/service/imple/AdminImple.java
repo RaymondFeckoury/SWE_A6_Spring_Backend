@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.repo.*;
 import com.example.demo.model.AdminRegistration;
+import com.example.demo.model.userRegistration;
 import com.example.excepion.IdNotFoundException;
 import com.example.service.AdminService;
 @Service
@@ -26,6 +27,14 @@ public class AdminImple implements AdminService {
 	@Override
 	public  void save(AdminRegistration admin) {
 		AdminRepo.save(admin);
+	}
+	@Override
+	@ResponseBody
+	public AdminRegistration getAdminById(int id) throws IdNotFoundException {
+		List<AdminRegistration> admin = AdminRepo.findByid(id);
+		if (admin.isEmpty())
+			throw new IdNotFoundException("Sorry user with " + id + " not found!");
+		return admin.get(0);
 	}
 	
 	

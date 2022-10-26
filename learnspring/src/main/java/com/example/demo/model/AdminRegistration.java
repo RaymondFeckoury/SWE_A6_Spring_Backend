@@ -25,9 +25,9 @@ public class AdminRegistration {
 	private int id;
 	private String aname;
 	private String ausername;
-	private String apassword;
+	private String password;
 	private String ahash;
-	private String aemail;
+	private String email;
 	private int amobile;
 	private String aaddress;
 	private int aactive;
@@ -35,7 +35,7 @@ public class AdminRegistration {
 	@Override
 	public String toString() {
 		return "AdminRegistration [id=" + id + ", aname=" + aname + ", ausername=" + ausername + ", apassword="
-				+ apassword + ", ahash=" + ahash + ", aemail=" + aemail + ", amobile=" + amobile + ", aaddress="
+				+ password + ", ahash=" + ahash + ", aemail=" + email + ", amobile=" + amobile + ", aaddress="
 				+ aaddress + ", aactive=" + aactive + "]";
 	}
 	
@@ -46,9 +46,9 @@ public class AdminRegistration {
 		this.id = id;
 		this.aname = aname;
 		this.ausername = ausername;
-		this.apassword = apassword;
+		this.password = apassword;
 		this.ahash = ahash;
-		this.aemail = aemail;
+		this.email = aemail;
 		this.amobile = amobile;
 		this.aaddress = aaddress;
 		this.aactive = aactive;
@@ -82,10 +82,10 @@ public class AdminRegistration {
 		this.ausername = ausername;
 	}
 	public String getApassword() {
-		return apassword;
+		return password;
 	}
 	public void setApassword(String apassword) {
-		this.apassword = apassword;
+		this.password = apassword;
 	}
 	public String getAhash() {
 		return ahash;
@@ -94,10 +94,10 @@ public class AdminRegistration {
 		this.ahash = ahash;
 	}
 	public String getAemail() {
-		return aemail;
+		return email;
 	}
 	public void setAemail(String aemail) {
-		this.aemail = aemail;
+		this.email = aemail;
 	}
 	public int getAmobile() {
 		return amobile;

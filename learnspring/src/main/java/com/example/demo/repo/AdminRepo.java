@@ -12,5 +12,6 @@ import com.example.demo.model.AdminRegistration;
 public interface AdminRepo extends JpaRepository<AdminRegistration,String> {
 
 	List<AdminRegistration> findByid(int id);
+	Boolean existsByEmailAndPassword(String email, String password);
 	
 }
