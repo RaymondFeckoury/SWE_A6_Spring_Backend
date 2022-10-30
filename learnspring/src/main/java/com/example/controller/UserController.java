@@ -1,5 +1,10 @@
 package com.example.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -48,7 +53,7 @@ public class UserController {
 	  @PostMapping("/user")
 	  public ResponseEntity<userRegistration> registerUser(@RequestBody userRegistration userRegistration) {
 		 //logger.info("Received controller");
-		 System.out.println("Controller called for user Registration "+userRegistration.toString());
+		 //System.out.println("Controller called for user Registration "+userRegistration.toString());
 		 return ResponseEntity.ok(repo.save(userRegistration));
 			
 			
@@ -89,7 +94,7 @@ public class UserController {
 	  
 	  }
 	  
-	  // To update profile
+	  /* To update profile
 	  @PutMapping(path = "/updateuserinfo/{userId}")
 	  public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody userRegistration userReg) throws IdNotFoundException {
 		    userRegistration curUser = us.getUserById(userId);
@@ -117,7 +122,60 @@ public class UserController {
 			// save changes and return updated userRegistration
 			repo.save(curUser);
 			return ResponseEntity.status(200).body(curUser);
-		}
+	  }*/
+	  
+	  @PostMapping("/editprofile")
+	  public String editProfile(@RequestBody userRegistration userRegistration) throws SQLException{
+	        int id = userRegistration.getId();
+	        String fullname = userRegistration.getFullname();
+	        int phone = userRegistration.getPhone();
+	        String address1 = userRegistration.getAddress1();
+	        String address2 = userRegistration.getAddress2();
+	        String city = userRegistration.getCity();
+	        String state = userRegistration.getState();
+	        String country = userRegistration.getCountry();
+	        String zipcode = userRegistration.getZipcode();
+	        /*int cardNo = userRegistration.getCardNo();
+	        String month = userRegistration.getMonth();
+	        int year = userRegistration.getYear();
+	        String name = userRegistration.getName();*/
+	        String promotion = userRegistration.getPromotion();
+	        
+	        try {
+	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinemabooking", "root", "password");
+	            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE users SET fullname = ?, phone = ?, address1 = ?, address2 = ?, city = ?, state = ?, country = ?, zipcode = ?, promotion = ? WHERE id = ?");
+	            preparedStatement.setString(1, fullname);
+	            preparedStatement.setInt(2, phone);
+	            preparedStatement.setString(3, address1);
+	            preparedStatement.setString(4, address2);
+	            preparedStatement.setString(5, city);
+	            preparedStatement.setString(6, state);
+	            preparedStatement.setString(7, country);
+	            preparedStatement.setString(8, zipcode);
+	            /*preparedStatement.setInt(9, cardNo);
+	            preparedStatement.setString(10, month);
+	            preparedStatement.setInt(11, year);
+	            preparedStatement.setString(12, name);*/
+	            preparedStatement.setString(9, promotion);
+	            preparedStatement.setInt(10, id);
+	            //preparedStatement.setLong(5, id);
+	            preparedStatement.executeUpdate();
+	            preparedStatement.close();
+	            //RName="Working";
+	            //System.out.println(Name);
+	            //java.sql.Statement stmt = conn.createStatement();
+	            /*ResultSet resultSet = stmt.executeQuery("SELECT fullname FROM users WHERE fullname = " + "'" + """ + "'");
+				//userID = resultSet.getInt("userID");
+	            while (resultSet.next()) {
+	            	RName=resultSet.getString("Name"); 
+	            }*/
+	        }catch(SQLException exception){
+	        	exception.printStackTrace();
+	        }
+	      
+	        
+	        return "ignore this";
+	  }
 
 	  
 	  @GetMapping("/{id}")

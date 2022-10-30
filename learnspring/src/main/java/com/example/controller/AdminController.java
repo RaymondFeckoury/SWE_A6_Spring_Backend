@@ -36,7 +36,7 @@ public class AdminController {
 	  private AdminService as;
 	  
 	  @PostMapping("/admin")
-	  public ResponseEntity<AdminRegistration> registerUser(@RequestBody AdminRegistration AdminRegistration) {
+	  public ResponseEntity<AdminRegistration> registerAdmin(@RequestBody AdminRegistration AdminRegistration) {
 		 //logger.info("Received controller");
 		 System.out.println("Controller called for user Registration "+AdminRegistration.toString());
 		 return ResponseEntity.ok(repo.save(AdminRegistration));

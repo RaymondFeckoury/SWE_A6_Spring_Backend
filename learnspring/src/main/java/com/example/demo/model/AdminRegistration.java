@@ -34,8 +34,8 @@ public class AdminRegistration {
 	
 	@Override
 	public String toString() {
-		return "AdminRegistration [id=" + id + ", aname=" + aname + ", ausername=" + ausername + ", apassword="
-				+ password + ", ahash=" + ahash + ", aemail=" + email + ", amobile=" + amobile + ", aaddress="
+		return "AdminRegistration [id=" + id + ", aname=" + aname + ", ausername=" + ausername + ", password="
+				+ password + ", ahash=" + ahash + ", email=" + email + ", amobile=" + amobile + ", aaddress="
 				+ aaddress + ", aactive=" + aactive + "]";
 	}
 	
