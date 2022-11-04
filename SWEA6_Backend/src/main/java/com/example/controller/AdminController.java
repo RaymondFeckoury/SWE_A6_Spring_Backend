@@ -20,93 +20,89 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.AdminRegistration;
 import com.example.demo.model.userRegistration;
+import com.example.demo.model.Movie;
 import com.example.demo.repo.AdminRepo;
 import com.example.demo.repo.UserRepo;
+import com.example.demo.repo.MovieRepo;
 import com.example.service.AdminService;
+import com.example.service.MovieService;
 import com.example.service.imple.Emailsenderservice;
 import com.example.service.imple.userimple;
 
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200") 
-@RequestMapping("/adm")	
+@RequestMapping("/admin")	
 public class AdminController {
+	
 	@Autowired
 	private AdminRepo repo;
-
-	
-	  @Autowired 
-	  private AdminService as;
-	  
-	  
-	  @Autowired
-	  UserRepo ur;
-	  
-	  @Autowired
-	  Emailsenderservice emailsenderservice;
+	@Autowired 
+	private AdminService as;
+	@Autowired
+	UserRepo ur;  
+	@Autowired
+	Emailsenderservice emailsenderservice;
+	@Autowired
+	private MovieRepo movierepo;
 	
 	  
-	  @PostMapping("/admin")
-	  public ResponseEntity<AdminRegistration> registerUser(@RequestBody AdminRegistration AdminRegistration) {
-		 //logger.info("Received controller");
-		 System.out.println("Controller called for user Registration "+AdminRegistration.toString());
+	@PostMapping("/admin")
+	public ResponseEntity<AdminRegistration> registerUser(@RequestBody AdminRegistration AdminRegistration) {
 		 return ResponseEntity.ok(repo.save(AdminRegistration));
-	  }
+	}
 	  
-	  @PostMapping("/adminlogin")
-	  public ResponseEntity<Boolean> adminLogin(@RequestBody AdminRegistration AdminRegistration) {
-		 return ResponseEntity.ok(repo.existsByEmailAndPassword(AdminRegistration.getEmail(), AdminRegistration.getPassword()));
-	  }
-	  @PostMapping("/newadmin")
-	  public boolean newadmin(@RequestBody AdminRegistration AdminRegistration) throws MessagingException{
-		  List<AdminRegistration> accountData = repo.findByemail(AdminRegistration.getEmail());
-			 if(accountData.isEmpty()) {
-				 List<userRegistration> accountData2 = ur.findByemail(AdminRegistration.getEmail()); 
-				 if(accountData.isEmpty()) {
-					 repo.save(AdminRegistration);
-					 emailsenderservice.sendemailwithattachment(AdminRegistration.getEmail(),"Registered as admin succesfully","admin registration");
-					 return true;
-				 }
-				 else {
-					 return false;
-				 }
-				 }else {
-					 return false;
-				 }
-			 }
-				 
-		  
+	@PostMapping("/adminlogin")
+	public ResponseEntity<Boolean> adminLogin(@RequestBody AdminRegistration AdminRegistration) {
+		return ResponseEntity.ok(repo.existsByEmailAndPassword(AdminRegistration.getEmail(), AdminRegistration.getPassword()));
+	}
+	
+	@PostMapping("/newadmin")
+	public boolean newadmin(@RequestBody AdminRegistration AdminRegistration) throws MessagingException{
+		List<AdminRegistration> accountData = repo.findByemail(AdminRegistration.getEmail());
+		if(accountData.isEmpty()) {
+			List<userRegistration> accountData2 = ur.findByemail(AdminRegistration.getEmail()); 
+			if(accountData.isEmpty()) {
+				repo.save(AdminRegistration);
+				emailsenderservice.sendemailwithattachment(AdminRegistration.getEmail(),"Registered as admin succesfully","admin registration");
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+				 	  
+	@GetMapping(path = "/alladmins") 
+	public ResponseEntity<?> getAdmins() { 
+		return ResponseEntity.status(200).body(as.getAllAdmins());
+	}
+	
+	@PostMapping("/addmovie")
+	public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+		 return ResponseEntity.ok(movierepo.save(movie));
+	}
 	  
-	  
-	  // only admins have rights to inspect all users data
-	  
-	  @GetMapping(path = "/alladmins") 
-	  public ResponseEntity<?> getAdmins() { 
-		// get all users, returns empty list if user table is empty
-
-		  return ResponseEntity.status(200).body(as.getAllAdmins());
-	  
-	  
-	  }
-	  
-		/*
-		 * @GetMapping("/admin/{id}") public ResponseEntity<List<AdminRegistration>>
-		 * getAccountByNumber(@PathVariable("id") int id) {
-		 * 
-		 * List<AdminRegistration> accountData = repo.findByid(id);
-		 * 
-		 * if (accountData.isEmpty()) {
-		 * 
-		 * return new ResponseEntity<List<AdminRegistration>>(HttpStatus.NO_CONTENT); }
-		 * 
-		 * System.out.println(id);
-		 * 
-		 * 
-		 * AdminRegistration pqr=accountData.get(0);
-		 * 
-		 * return new
-		 * ResponseEntity<List<AdminRegistration>>(accountData,HttpStatus.OK);
-		 * 
-		 * }
-		 */
 }
+
+/*
+ * @GetMapping("/admin/{id}") public ResponseEntity<List<AdminRegistration>>
+ * getAccountByNumber(@PathVariable("id") int id) {
+ * 
+ * List<AdminRegistration> accountData = repo.findByid(id);
+ * 
+ * if (accountData.isEmpty()) {
+ * 
+ * return new ResponseEntity<List<AdminRegistration>>(HttpStatus.NO_CONTENT); }
+ * 
+ * System.out.println(id);
+ * 
+ * 
+ * AdminRegistration pqr=accountData.get(0);
+ * 
+ * return new
+ * ResponseEntity<List<AdminRegistration>>(accountData,HttpStatus.OK);
+ * 
+ * }
+ */
