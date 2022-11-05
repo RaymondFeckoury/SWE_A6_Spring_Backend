@@ -45,6 +45,8 @@ public class AdminController {
 	Emailsenderservice emailsenderservice;
 	@Autowired
 	private MovieRepo movierepo;
+	@Autowired
+	private MovieService ms;
 	
 	  
 	@PostMapping("/admin")
@@ -82,6 +84,11 @@ public class AdminController {
 	@PostMapping("/addmovie")
 	public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
 		 return ResponseEntity.ok(movierepo.save(movie));
+	}
+	
+	@GetMapping(path = "/allmovies") 
+	public ResponseEntity<?> getMovies() { 
+		return ResponseEntity.status(200).body(ms.getAllMovies());
 	}
 	  
 }
