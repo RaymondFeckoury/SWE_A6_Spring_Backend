@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.AdminRegistration;
 import com.example.demo.model.userRegistration;
 import com.example.demo.model.Movie;
+import com.example.demo.model.ShowRoom;
+import com.example.demo.model.UpcomingShow;
 import com.example.demo.repo.AdminRepo;
 import com.example.demo.repo.UserRepo;
 import com.example.demo.repo.MovieRepo;
+import com.example.demo.repo.UpcomingShowRepo;
+import com.example.demo.repo.ShowRoomRepo;
 import com.example.service.AdminService;
 import com.example.service.MovieService;
 import com.example.service.imple.Emailsenderservice;
@@ -47,6 +51,10 @@ public class AdminController {
 	private MovieRepo movierepo;
 	@Autowired
 	private MovieService ms;
+	@Autowired
+	private ShowRoomRepo showroomrepo;
+	@Autowired
+	private UpcomingShowRepo upcomingshowrepo;
 	
 	  
 	@PostMapping("/admin")
@@ -84,6 +92,17 @@ public class AdminController {
 	@PostMapping("/addmovie")
 	public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
 		 return ResponseEntity.ok(movierepo.save(movie));
+	}
+	
+	// Should only be used to add all 6 show rooms before running the project. Not needed afterwards
+	@PostMapping("/addshowroom")
+	public ResponseEntity<ShowRoom> addShowRoom(@RequestBody ShowRoom showroom) {
+		 return ResponseEntity.ok(showroomrepo.save(showroom));
+	}
+	
+	@PostMapping("/addupcomingshow")
+	public ResponseEntity<UpcomingShow> addShow(@RequestBody UpcomingShow show) {
+		 return ResponseEntity.ok(upcomingshowrepo.save(show));
 	}
 	
 	@GetMapping(path = "/allmovies") 
