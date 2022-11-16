@@ -5,7 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.mail.MessagingException;
 
@@ -426,5 +433,24 @@ return true;
 		  emailsenderservice.sendemailwithattachment(userRegistration.getEmail(),"Your profile has been succesfully updated","Profile Updated");
 		  return "email sent Successfully";
 	  }
+	  
+	    // Returns all show times for a movie
+		@GetMapping(path = "/getshowtimes/{movieId}")
+		public List<Entry<Date,Time>> showDateAndTime(@PathVariable int movieId) {
+			List<Entry<Date,Time>> pairList = new ArrayList<>();
+			try {
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinemabooking", "root", "password");
+				java.sql.Statement stmt = conn.createStatement();
+				ResultSet resultSet = stmt.executeQuery("SELECT date,time FROM showtimes WHERE movieid = "+ "'" + movieId + "'");
+				while(resultSet.next()) {
+					Entry<Date,Time> curTime = new AbstractMap.SimpleEntry<>(resultSet.getDate("date"),resultSet.getTime("time"));
+					pairList.add(curTime);
+				}
+				return pairList;
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return null;
+		}
 	  
 }

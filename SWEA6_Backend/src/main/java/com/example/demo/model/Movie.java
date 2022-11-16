@@ -35,8 +35,17 @@ public class Movie {
 	private String category;
 	private String rating;
 	
+	
+	
+	
+	private int currentrunning;
+	
+	
+
+	
+
 	public Movie(int id, String title, String cast, String director, String producer, String synopsis, URL trailer,
-			File thumbnail, Date startdate, Date enddate, String category, String rating) {
+			File thumbnail, Date startdate, Date enddate, String category, String rating, int currentrunning) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -50,19 +59,24 @@ public class Movie {
 		this.enddate = enddate;
 		this.category = category;
 		this.rating = rating;
+		this.currentrunning = currentrunning;
 	}
+
+
 
 	public Movie() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", title=" + title + ", cast=" + cast + ", director=" + director + ", producer="
 				+ producer + ", synopsis=" + synopsis + ", trailer=" + trailer + ", thumbnail=" + thumbnail
 				+ ", startdate=" + startdate + ", enddate=" + enddate + ", category=" + category + ", rating=" + rating
-				+ "]";
+				+ ", currentrunning=" + currentrunning + "]";
 	}
 
 	public int getId() {
@@ -160,5 +174,21 @@ public class Movie {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
+
+
+
+	public int getCurrentrunning() {
+		return currentrunning;
+	}
+
+
+
+	public void setCurrentrunning(int currentrunning) {
+		this.currentrunning = currentrunning;
+	}
+
+	
+	
+	
 	
 }
