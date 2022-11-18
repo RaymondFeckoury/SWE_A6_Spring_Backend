@@ -29,8 +29,12 @@ public class MovieEntity {
 	
 	
 
+	
+
+
+
 	public MovieEntity(int id, String adminemail, String title, String cast, String director, String producer,
-			String synopsis, URL trailer, Blob thumbnail, Date startdate, Date enddate, String[] category,
+			String synopsis, URL trailer, String thumbnail, Date startdate, Date enddate, String[] category,
 			String rating) {
 		super();
 		this.id = id;
@@ -47,6 +51,10 @@ public class MovieEntity {
 		this.category = category;
 		this.rating = rating;
 	}
+
+
+
+
 
 
 
@@ -93,13 +101,19 @@ public class MovieEntity {
 		this.trailer = trailer;
 	}
 	
-	public Blob getThumbnail() {
+	
+
+	public String getThumbnail() {
 		return thumbnail;
 	}
 
-	public void setThumbnail(Blob thumbnail) {
+
+
+	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+
+
 
 	public Date getStartdate() {
 		return startdate;
@@ -142,7 +156,7 @@ public class MovieEntity {
 	private String producer;
 	private String synopsis;
 	private URL trailer;
-	private Blob thumbnail; // change datatype
+	private String thumbnail; // change datatype
 	private Date startdate;
 	private Date enddate;
 	private String[] category; // now an array <- start with this one
