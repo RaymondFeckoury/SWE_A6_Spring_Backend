@@ -3,6 +3,7 @@ package com.example.demo.model;
 import java.io.File;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,10 +26,15 @@ public class MovieEntity {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MovieEntity(int id, String title, String cast, String director, String producer, String synopsis,
-			URL trailer, File thumbnail, Date startdate, Date enddate, String category, String rating,String adminemail) {
+	
+	
+
+	public MovieEntity(int id, String adminemail, String title, String cast, String director, String producer,
+			String synopsis, URL trailer, Blob thumbnail, Date startdate, Date enddate, String[] category,
+			String rating) {
 		super();
 		this.id = id;
+		this.adminemail = adminemail;
 		this.title = title;
 		this.cast = cast;
 		this.director = director;
@@ -40,8 +46,10 @@ public class MovieEntity {
 		this.enddate = enddate;
 		this.category = category;
 		this.rating = rating;
-		this.adminemail=adminemail;
 	}
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -84,12 +92,15 @@ public class MovieEntity {
 	public void setTrailer(URL trailer) {
 		this.trailer = trailer;
 	}
-	public File getThumbnail() {
+	
+	public Blob getThumbnail() {
 		return thumbnail;
 	}
-	public void setThumbnail(File thumbnail) {
+
+	public void setThumbnail(Blob thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+
 	public Date getStartdate() {
 		return startdate;
 	}
@@ -102,10 +113,11 @@ public class MovieEntity {
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
-	public String getCategory() {
+	
+	public String[] getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(String[] category) {
 		this.category = category;
 	}
 	public String getRating() {
@@ -130,10 +142,10 @@ public class MovieEntity {
 	private String producer;
 	private String synopsis;
 	private URL trailer;
-	private File thumbnail; // change datatype
+	private Blob thumbnail; // change datatype
 	private Date startdate;
 	private Date enddate;
-	private String category; // now an array <- start with this one
+	private String[] category; // now an array <- start with this one
 	private String rating;
 }
 
