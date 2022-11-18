@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,8 +30,8 @@ import com.example.demo.model.PaymentCard;
 public class userRegistration {
 	
 	@Id
-	@GeneratedValue
-	private int id;
+    @GeneratedValue
+    private int id;
 	private String firstname;
 	private String email;
 	private String password;
@@ -45,34 +48,16 @@ public class userRegistration {
 	private String passvercode;
 	private String updatedpass;
 	private String lastname;
-	private String cardnumber;
-	private String cardexpirymonth;
-	private String cardexpiryyear;
-	private String nameoncard;
-	public String getCardnumber() {
-		return cardnumber;
+	private String userstatus;
+	public String getUserstatus() {
+		return userstatus;
 	}
-	public void setCardnumber(String cardnumber) {
-		this.cardnumber = cardnumber;
+	public void setUserstatus(String userstatus) {
+		this.userstatus = userstatus;
 	}
-	public String getCardexpirymonth() {
-		return cardexpirymonth;
-	}
-	public void setCardexpirymonth(String cardexpirymonth) {
-		this.cardexpirymonth = cardexpirymonth;
-	}
-	public String getCardexpiryyear() {
-		return cardexpiryyear;
-	}
-	public void setCardexpiryyear(String cardexpiryyear) {
-		this.cardexpiryyear = cardexpiryyear;
-	}
-	public String getNameoncard() {
-		return nameoncard;
-	}
-	public void setNameoncard(String nameoncard) {
-		this.nameoncard = nameoncard;
-	}
+	@OneToMany(targetEntity = PaymentCard.class,cascade = CascadeType.ALL)
+	@JoinColumn(name ="cp_fk",referencedColumnName = "id")
+	private List<PaymentCard> paymentcard;
 	public int getId() {
 		return id;
 	}
@@ -87,6 +72,14 @@ public class userRegistration {
 	}
 	public String getEmail() {
 		return email;
+	}
+	@Override
+	public String toString() {
+		return "userRegistration [id=" + id + ", firstname=" + firstname + ", email=" + email + ", password=" + password
+				+ ", phone=" + phone + ", address1=" + address1 + ", address2=" + address2 + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", zipcode=" + zipcode + ", promotion=" + promotion
+				+ ", verificationcode=" + verificationcode + ", activated=" + activated + ", passvercode=" + passvercode
+				+ ", updatedpass=" + updatedpass + ", lastname=" + lastname + ", paymentcard=" + paymentcard + "]";
 	}
 	public void setEmail(String email) {
 		this.email = email;
@@ -175,11 +168,16 @@ public class userRegistration {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
+	public List<PaymentCard> getPaymentcard() {
+		return paymentcard;
+	}
+	public void setPaymentcard(List<PaymentCard> paymentcard) {
+		this.paymentcard = paymentcard;
+	}
 	public userRegistration(int id, String firstname, String email, String password, String phone, String address1,
 			String address2, String city, String state, String country, String zipcode, String promotion,
 			String verificationcode, String activated, String passvercode, String updatedpass, String lastname,
-			String cardnumber, String cardexpirymonth, String cardexpiryyear, String nameoncard) {
+			List<PaymentCard> paymentcard,String userstatus) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -198,16 +196,28 @@ public class userRegistration {
 		this.passvercode = passvercode;
 		this.updatedpass = updatedpass;
 		this.lastname = lastname;
-		this.cardnumber = cardnumber;
-		this.cardexpirymonth = cardexpirymonth;
-		this.cardexpiryyear = cardexpiryyear;
-		this.nameoncard = nameoncard;
+		this.paymentcard = paymentcard;
+		this.userstatus= userstatus;
 	}
 	public userRegistration() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	/*
+	 * private String cardnumber; private String cardexpirymonth; private String
+	 * cardexpiryyear; private String nameoncard;
+	 */
+	/*
+	 * public String getCardnumber() { return cardnumber; } public void
+	 * setCardnumber(String cardnumber) { this.cardnumber = cardnumber; } public
+	 * String getCardexpirymonth() { return cardexpirymonth; } public void
+	 * setCardexpirymonth(String cardexpirymonth) { this.cardexpirymonth =
+	 * cardexpirymonth; } public String getCardexpiryyear() { return cardexpiryyear;
+	 * } public void setCardexpiryyear(String cardexpiryyear) { this.cardexpiryyear
+	 * = cardexpiryyear; } public String getNameoncard() { return nameoncard; }
+	 * public void setNameoncard(String nameoncard) { this.nameoncard = nameoncard;
+	 * }
+	 */
 	
-	
- 
 }

@@ -23,13 +23,12 @@ import lombok.ToString;
 public class PaymentCard {
 	
 	@Id
-	@GeneratedValue
 	private int cardid;
-	private int id;
 	private int cardnumber;
 	private int expirymonth;
 	private int expiryyear;
 	private String nameoncard;
+	private int old_data;
 	
 	/*
 	 * @ManyToOne(cascade= CascadeType.ALL)
@@ -37,6 +36,12 @@ public class PaymentCard {
 	 * @JoinColumn(name = "id") private userRegistration paymentcard;
 	 */
 	
+	public int getOld_data() {
+		return old_data;
+	}
+	public void setOld_data(int old_data) {
+		this.old_data = old_data;
+	}
 	public PaymentCard() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -47,15 +52,17 @@ public class PaymentCard {
 	public void setNameoncard(String nameoncard) {
 		this.nameoncard = nameoncard;
 	}
-	public PaymentCard(int cardid, int cardnumber, int expirymonth, int expiryyear,String nameoncard,int id) {
+	public PaymentCard(int cardid, int cardnumber, int expirymonth, int expiryyear,String nameoncard,int old_data) {
 		super();
 		
 		this.cardid = cardid;
-		this.id = id;
+		
 		this.cardnumber = cardnumber;
 		this.expirymonth = expirymonth;
 		this.expiryyear = expiryyear;
 		this.nameoncard=nameoncard;
+		this.old_data=old_data;
+		
 	}
 	@Override
 	public String toString() {
@@ -70,12 +77,6 @@ public class PaymentCard {
 	}
 
 	
-	  public int getId() { 
-		  return id; 
-		  } 
-	  public void setId(int id) { 
-		  this.id = id; 
-		  }
 	 
 	public int getCardnumber() {
 		return cardnumber;
